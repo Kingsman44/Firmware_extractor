@@ -1,0 +1,38 @@
+name: Extract Firmware Images
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract rename liblzma-dev python3-pip brotli lz4
+          pip3 install backports.lzma protobuf pycrypto
+
+      - name: Clone Firmware_extractor
+        run: |
+          git clone --recurse-submodules https://github.com/erfanoabdi/Firmware_extractor.git
+
+      - name: Download firmware
+        run: |
+          cd Firmware_extractor
+          wget https://dl.google.com/dl/android/aosp/lynx-bp1a.250505.005.b1-factory-45a1393f.zip -O firmware.zip
+
+      - name: Extract images
+        run: |
+          cd Firmware_extractor
+          chmod +x extractor.sh
+          ./extractor.sh firmware.zip
+
+      - name: Upload extracted .img files
+        uses: actions/upload-artifact@v4
+        with:
+          name: extracted-imgs
+          path: Firmware_extractor/out/*.img
