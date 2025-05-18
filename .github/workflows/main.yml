@@ -34,8 +34,8 @@ jobs:
           chmod +x extractor.sh
           ./extractor.sh firmware.zip
 
-      - name: Upload extracted .img files
+      - name: Upload init_boot.img
         uses: actions/upload-artifact@v4
         with:
-          name: extracted-imgs
-          path: Firmware_extractor/out/*.img
+          name: init_boot-img
+          path: Firmware_extractor/out/init_boot.img
