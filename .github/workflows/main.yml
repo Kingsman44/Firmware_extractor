@@ -33,6 +33,7 @@ jobs:
           cd Firmware_extractor
           chmod +x extractor.sh
           ./extractor.sh firmware.zip
+          ls Firmware_extractor/out
 
       - name: Upload init_boot.img
         uses: actions/upload-artifact@v4
