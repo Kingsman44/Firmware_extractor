@@ -33,10 +33,10 @@ jobs:
           cd Firmware_extractor
           chmod +x extractor.sh
           ./extractor.sh firmware.zip
-          ls Firmware_extractor/out
+          ls /home/runner/work/Firmware_extractor/Firmware_extractor/Firmware_extractor/out
 
       - name: Upload init_boot.img
         uses: actions/upload-artifact@v4
         with:
           name: init_boot-img
-          path: Firmware_extractor/out/init_boot.img
+          path: /home/runner/work/Firmware_extractor/Firmware_extractor/Firmware_extractor/out/init_boot.img
