@@ -21,22 +21,23 @@ jobs:
 
       - name: Clone Firmware_extractor
         run: |
-          git clone --recurse-submodules https://github.com/erfanoabdi/Firmware_extractor.git
+          git clone --recurse-submodules https://github.com/AndroidDumps/dumpyara
 
       - name: Download firmware
         run: |
-          cd Firmware_extractor
+          cd dumpyara
           wget https://dl.google.com/dl/android/aosp/lynx-bp1a.250505.005.b1-factory-45a1393f.zip -O firmware.zip
 
       - name: Extract images
         run: |
-          cd Firmware_extractor
-          chmod +x extractor.sh
-          ./extractor.sh firmware.zip
-          ls /home/runner/work/Firmware_extractor/Firmware_extractor/Firmware_extractor/out
+          cd dumpyara
+          chmod +x setup.sh dumpyara.sh
+          bash setup.sh
+          bash dumpyara.sh firmware.zip
+          ls firmware
 
       - name: Upload init_boot.img
         uses: actions/upload-artifact@v4
         with:
           name: init_boot-img
-          path: /home/runner/work/Firmware_extractor/Firmware_extractor/Firmware_extractor/out/init_boot.img
+          path: firmware/init_boot.img
