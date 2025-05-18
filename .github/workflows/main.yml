@@ -13,8 +13,11 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract rename liblzma-dev python3-pip brotli lz4 build-essential
-          pip3 install backports.lzma protobuf pycrypto
+          sudo apt-get install -y \
+            unace unrar zip unzip p7zip-full p7zip-rar sharutils rar \
+            uudeview mpack arj cabextract rename liblzma-dev python3-pip \
+            brotli lz4 build-essential python3-dev
+          pip3 install backports.lzma protobuf pycryptodome
 
       - name: Clone Firmware_extractor
         run: |
